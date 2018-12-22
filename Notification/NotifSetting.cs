@@ -21,8 +21,7 @@ namespace Notification
 
         private void NotifSetting_Load(object sender, EventArgs e)
         {
-            //var PrivateSize = Properties.Settings.Default.PrivateSize;
-            //this.chPrivateSize.Checked = PrivateSize;
+            
 
 
             txttimerintervalEnabled.Text = ConfigurationManager.AppSettings["TimerInterval"];
@@ -32,7 +31,7 @@ namespace Notification
             txtNotifMessage.Text = ConfigurationManager.AppSettings["NotifMessage"];
             txtNotifInterval.Text = ConfigurationManager.AppSettings["NotifInterval"];
             txtNotifTimeShow.Text = ConfigurationManager.AppSettings["NotifTimeToshow"];
-           // comboIcon.Text = Properties.Settings.Default.NotifIcon.ToString();
+           
 
         }
 
@@ -43,37 +42,43 @@ namespace Notification
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-    //        Properties.Settings.Default.TimerInterval =Int32.Parse( txttimerintervalEnabled.Text);
-    //        Properties.Settings.Default.NotifEnabled = checkboxNotifEnabled.Checked;
-    //       Properties.Settings.Default.NotifTitle = txtNotfiTtitle.Text;
-    //        Properties.Settings.Default.NotifMessage = txtNotifMessage.Text;
-    //        Properties.Settings.Default.NotifInterval = Int32.Parse(txtNotifInterval.Text);
-    //        Properties.Settings.Default.NotifTimeToshow = Int32.Parse(txtNotifTimeShow.Text);
-    
-    ////Properties.Settings.Default.NotifIcon = System.Windows.Forms.ToolTipIcon(comboIcon.Text);
-
-    //        Properties.Settings.Default.Save();
+            try
+            {
 
 
+                Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
+                config.AppSettings.Settings.Remove("TimerInterval");
+                config.AppSettings.Settings.Remove("NotifEnabled");
+                config.AppSettings.Settings.Remove("NotifTitle");
+                config.AppSettings.Settings.Remove("NotifMessage");
+                config.AppSettings.Settings.Remove("NotifInterval");
+                config.AppSettings.Settings.Remove("NotifTimeToshow");
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-            config.AppSettings.Settings.Remove("TimerInterval");
-            config.AppSettings.Settings.Remove("NotifEnabled");
-            config.AppSettings.Settings.Remove("NotifTitle");
-            config.AppSettings.Settings.Remove("NotifMessage");
-            config.AppSettings.Settings.Remove("NotifInterval");
-            config.AppSettings.Settings.Remove("NotifTimeToshow");
+                config.AppSettings.Settings.Add("TimerInterval", txttimerintervalEnabled.Text);
+                bool result = checkboxNotifEnabled.CheckState == CheckState.Checked ? true : false;
 
-            config.AppSettings.Settings.Add("TimerInterval",txttimerintervalEnabled.Text);
-            bool result = checkboxNotifEnabled.CheckState == CheckState.Checked ? true : false;
+                config.AppSettings.Settings.Add("NotifEnabled", result.ToString());
+                config.AppSettings.Settings.Add("NotifTitle", txtNotfiTtitle.Text);
+                config.AppSettings.Settings.Add("NotifMessage", txtNotifMessage.Text);
+                config.AppSettings.Settings.Add("NotifInterval", txtNotifInterval.Text);
+                config.AppSettings.Settings.Add("NotifTimeToshow", txtNotifTimeShow.Text);
+
+                config.Save(ConfigurationSaveMode.Minimal);
+                MessageBox.Show("All Content Will Be saved");
+                //Application.Exit();
+                
 
             config.AppSettings.Settings.Add("NotifEnabled", result.ToString());
             config.AppSettings.Settings.Add("NotifTitle", txtNotfiTtitle.Text);
             config.AppSettings.Settings.Add("NotifMessage", txtNotifMessage.Text);
             config.AppSettings.Settings.Add("NotifInterval", txtNotifInterval.Text);
-            config.AppSettings.Settings.Add("NotifTimeToshow", txtNotifTimeShow.Text);
            
             config.Save(ConfigurationSaveMode.Minimal);
+            }
+            catch
+            {
+                MessageBox.Show("Error Data Entry");
+            }
         }
     }
 }
