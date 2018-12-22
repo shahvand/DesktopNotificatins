@@ -1,30 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Notification.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="NotifTitle" Type="System.String" Scope="User">
-      <Value Profile="(Default)">همکار گرامی</Value>
-    </Setting>
-    <Setting Name="NotifMessage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">با توجه به بررسی های انجام شده </Value>
-    </Setting>
-    <Setting Name="NotifEnabled" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="NotifInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
-    </Setting>
-    <Setting Name="NotifTimeToshow" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
-    </Setting>
-    <Setting Name="NotifIcon" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="NotifTocClick" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="TimerInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">10000</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>
