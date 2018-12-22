@@ -37,20 +37,7 @@ namespace Notification
                 form2.Show();
             }
             notifyIcon1.Visible = false;
-            //Process[] pname = Process.GetProcessesByName("Notification");
-            //if (pname.Length > 0)
-            //{
-            //    foreach (var process in Process.GetProcessesByName("Notification"))
-            //    {
-            //        process.Kill();
-            //    }
-            //    Process.Start(@"\\192.168.0.1\Software\Assistant\Notification\Notification.exe");
 
-            //}
-            //else
-            //{
-
-            //}
 
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
