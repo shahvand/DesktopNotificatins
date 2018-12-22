@@ -42,43 +42,41 @@ namespace Notification
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
+           // try
+           // {
 
 
                 Configuration config = ConfigurationManager.OpenExeConfiguration(Application.ExecutablePath);
-                config.AppSettings.Settings.Remove("TimerInterval");
-                config.AppSettings.Settings.Remove("NotifEnabled");
-                config.AppSettings.Settings.Remove("NotifTitle");
-                config.AppSettings.Settings.Remove("NotifMessage");
-                config.AppSettings.Settings.Remove("NotifInterval");
-                config.AppSettings.Settings.Remove("NotifTimeToshow");
+                //config.AppSettings.Settings.Remove("TimerInterval");
+                //config.AppSettings.Settings.Remove("NotifEnabled");
+                //config.AppSettings.Settings.Remove("NotifTitle");
+                //config.AppSettings.Settings.Remove("NotifMessage");
+                //config.AppSettings.Settings.Remove("NotifInterval");
+                //config.AppSettings.Settings.Remove("NotifTimeToshow");
 
-                config.AppSettings.Settings.Add("TimerInterval", txttimerintervalEnabled.Text);
+                config.AppSettings.Settings["TimerInterval"].Value= txttimerintervalEnabled.Text;
+                var config2 = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
                 bool result = checkboxNotifEnabled.CheckState == CheckState.Checked ? true : false;
 
-                config.AppSettings.Settings.Add("NotifEnabled", result.ToString());
-                config.AppSettings.Settings.Add("NotifTitle", txtNotfiTtitle.Text);
-                config.AppSettings.Settings.Add("NotifMessage", txtNotifMessage.Text);
-                config.AppSettings.Settings.Add("NotifInterval", txtNotifInterval.Text);
-                config.AppSettings.Settings.Add("NotifTimeToshow", txtNotifTimeShow.Text);
+                config2.AppSettings.Settings["NotifEnabled"].Value= result.ToString();
+                config2.AppSettings.Settings["NotifTitle"].Value= txtNotfiTtitle.Text;
+                config2.AppSettings.Settings["NotifMessage"].Value = txtNotifMessage.Text;
+                config2.AppSettings.Settings["NotifInterval"].Value = txtNotifInterval.Text;
+                config2.AppSettings.Settings["NotifTimeToshow"].Value = txtNotifTimeShow.Text;
 
-                config.Save(ConfigurationSaveMode.Minimal);
+                config2.Save(ConfigurationSaveMode.Modified);
+                ConfigurationManager.RefreshSection("appSettings");
+
                 MessageBox.Show("All Content Will Be saved");
-                //Application.Exit();
+                Application.Exit();
                 
 
-            config.AppSettings.Settings.Add("NotifEnabled", result.ToString());
-            config.AppSettings.Settings.Add("NotifTitle", txtNotfiTtitle.Text);
-            config.AppSettings.Settings.Add("NotifMessage", txtNotifMessage.Text);
-            config.AppSettings.Settings.Add("NotifInterval", txtNotifInterval.Text);
-           
-            config.Save(ConfigurationSaveMode.Minimal);
-            }
-            catch
-            {
-                MessageBox.Show("Error Data Entry");
-            }
+          //  }
+          //  catch
+          //  {
+                //MessageBox.Show(Exception ,ex);
+           // }
         }
     }
 }
