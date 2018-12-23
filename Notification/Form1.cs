@@ -73,7 +73,7 @@ namespace Notification
         {
             try
             {
-                timer.Interval = Int32.Parse(ConfigurationManager.AppSettings["TimerInterval"]) * 1000 * 60;
+               // timer.Interval = Int32.Parse(ConfigurationManager.AppSettings["TimerInterval"]) * 1000 * 60;
 
 
                 if ((ConfigurationManager.AppSettings["NotifEnabled"]) == "false")
@@ -86,7 +86,7 @@ namespace Notification
                 {
                     timerNotif.Enabled = true;
                     
-                    timerNotif.Interval = Int32.Parse(ConfigurationManager.AppSettings["NotifInterval"]) * 60 * 1000;
+                    //timerNotif.Interval = Int32.Parse(ConfigurationManager.AppSettings["NotifInterval"]) * 60 * 1000;
                 }
             }
             catch
@@ -99,16 +99,32 @@ namespace Notification
         private void timerInterval_Tick(object sender, EventArgs e)
         {
             try
+              
             {
-                int timernotif =Int32.Parse( System.Configuration.ConfigurationManager.AppSettings["NotifInterval"]);
-                timerNotif.Interval = timernotif * 60 * 1000;
-                notifyIcon1.Visible = true;
-                string NotifTitle = System.Configuration.ConfigurationManager.AppSettings["NotifTitle"];
-                string NotifDescription = System.Configuration.ConfigurationManager.AppSettings["NotifMessage"]; 
+               // var executingAssembly = System.Reflection.Assembly.GetExecutingAssembly();
+
+               // var location = executingAssembly.Location;
+               // var Location = @"\\192.168.0.1\Software\Assistant\Notification\Notification.exe.Config";
+                //var config = ConfigurationManager.OpenExeConfiguration(Location);
+
+                int timernotif1  = timerNotif.Interval*60*1000;
                 
-                notifyIcon1.ShowBalloonTip(1000, NotifTitle, NotifDescription, ToolTipIcon.None);
+    
+                int timernotif =Int32.Parse(ConfigurationManager.AppSettings["NotifInterval"]);
+
+                if (timernotif1!=timernotif )
+                {
+                    timerNotif.Interval = timernotif * 60 * 1000;
+                }
+                
+                notifyIcon1.Visible = true;
+                string NotifTitle = ConfigurationManager.AppSettings["NotifTitle"];
+                string NotifDescription = ConfigurationManager.AppSettings["NotifMessage"];
+                int timershow =Int32.Parse( ConfigurationManager.AppSettings["NotifTimeToshow"]);
+                notifyIcon1.ShowBalloonTip(timershow, NotifTitle, NotifDescription, ToolTipIcon.None);
                 notifyIcon1.Visible = false;
-                timer.Stop();
+                // Force a reload in memory of the changed section.
+                ConfigurationManager.RefreshSection("appSettings");
             }
             catch
             { }
